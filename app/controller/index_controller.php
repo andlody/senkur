@@ -20,6 +20,7 @@ class index_controller extends Controller
 		$this->set('full_name',$USER->username);
 		//*/
 
+/*
 		if($this->session('status') != true){
 			require_once('../config.php');
 			if($USER->id!=0){
@@ -29,6 +30,7 @@ class index_controller extends Controller
 			else
 				$this->redirect('denied');
 		}
+*/
 	}
 
 	function index(){
