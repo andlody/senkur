@@ -24,7 +24,7 @@ class index_controller extends Controller
 			require_once('../config.php');
 			if($USER->id!=0){
 				$this->set('full_name',$USER->username);
-				$this->set('status',true);
+				$this->session('status',true);
 			}
 			else
 				$this->redirect('denied');
