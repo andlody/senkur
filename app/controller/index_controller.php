@@ -9,6 +9,8 @@ class index_controller extends Controller
 		} else
 			$this->redirect('denied');
 		*/
+
+		/*	
 		require_once('../config.php');
 
 		if($USER->id==0){
@@ -16,6 +18,17 @@ class index_controller extends Controller
 			return;
 		}
 		$this->set('full_name',$USER->username);
+		//*/
+
+		if($this->session('status') != true){
+			require_once('../config.php');
+			if($USER->id!=0){
+				$this->set('full_name',$USER->username);
+				$this->set('status',true);
+			}
+			else
+				$this->redirect('denied');
+		}
 	}
 
 	function index(){
