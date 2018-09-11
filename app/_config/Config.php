@@ -14,11 +14,12 @@ class Config {
 	const HOST 		= 'localhost';
 	const PORT 		= '3306';
 	
-	//const USER 		= 'usuariomoodle';
-	//const PASS 		= 'Cms@Azure2018';
-	//const DATABASE  = 'moodlesenati';
-
+	const USER 		= 'usuariomoodle';
+	const PASS 		= 'Cms@Azure2018';
+	const DATABASE  = 'moodlesenati';
+/*
 	const USER 		= 'root';
 	const PASS 		= '';
 	const DATABASE  = 'moodle';
+*/
 }
