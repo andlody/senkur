@@ -11,7 +11,7 @@
 		    </div>
 			</a>
 		</div>		
-<? 	} ?>
+<?php 	} ?>
 
 <div class="col-xs-12">
 	<div class="panel panel-primary text-justify">

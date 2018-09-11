@@ -7,9 +7,10 @@
             <div class="form-group">
                 <label for="sel1">Zonal:</label>
                 <select class="form-control" id="cbxZonal" onchange="verCampus()">
-                    <? for($i=0;$i<sizeof($v->get('sedes'));$i++){ ?>
+                    <option> </option>
+		    <?php for($i=0;$i<sizeof($v->get('sedes'));$i++){ ?>
                         <option value="<?= $v->get('sedes')[$i][0] ?>"><?= $v->get('sedes')[$i][0] ?></option>
-                    <? } ?>
+                    <?php } ?>
                 </select>
             </div>
         </div> 

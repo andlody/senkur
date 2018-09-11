@@ -3,8 +3,8 @@
 class denied_controller extends Controller
 { 
 	function index(){
-		if($this->session('status'))
-			$this->redirect('index');
+//		if($this->session('status'))
+//			$this->redirect('index');
 
 		$this->view("index/denied");
 		$this->template('_404');

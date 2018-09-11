@@ -3,10 +3,19 @@
 class index_controller extends Controller
 { 
 	function before(){
+		/*
 		if($this->session('status')){
 			$this->set('full_name','Andre Ochoa');	
 		} else
 			$this->redirect('denied');
+		*/
+		require_once('../config.php');
+
+		if($USER->id==0){
+			$this->redirect('denied');
+			return;
+		}
+		$this->set('full_name',$USER->username);
 	}
 
 	function index(){
@@ -76,6 +85,7 @@ class index_controller extends Controller
 
 
 	function cursosx(){
+	//	$this->write('hola');return;
 		$obj = $this->model('Cursos');
 		$this->set('cursos',$obj->getCategorias());
 	}

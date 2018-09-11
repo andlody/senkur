@@ -1,1 +1,1 @@
-<h1>Su usario no tiene acceso para entrar a esta applciacion.</h1>
+<h1>Su usario no tiene acceso para entrar a esta applicacion.</h1>
