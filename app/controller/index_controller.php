@@ -64,6 +64,9 @@ class index_controller extends Controller
 
 		$a = $obj->getListado($campus,$id);
 		$this->set('body',$a);
+		$this->set('campus',$campus);
+		$this->set('id',$id);
+		$this->set('curso',$obj->getNombreCurso($id));
 	}
 
 

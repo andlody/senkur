@@ -75,6 +75,10 @@ class Sedes extends Model {
 		return $x;
 	}
 
+	public function getNombreCurso($id){
+		return $this->query("SELECT fullname FROM mdl_course WHERE id = ?",array($id))[0][0];
+	}
+
 
 
 
