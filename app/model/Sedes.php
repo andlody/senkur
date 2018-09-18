@@ -48,6 +48,40 @@ class Sedes extends Model {
 		return $b;
 	}
 
+	public function getListado($campus,$id){
+		$a = $this->query("SELECT DISTINCT userid FROM mdl_user_info_data WHERE fieldid=4 AND  data LIKE ?",array($campus));
+		
+		$b = array();
+		$k=0;
+		foreach ($a as $v) {
+			if($this->query("SELECT roleid FROM mdl_role_assignments WHERE userid = ".$v[0])[0][0] == 5){
+				$b[$k]=$v;
+				$k++;
+			}
+		}
+
+		$a=$b;
+
+		$x = array();
+		$k=0;
+		foreach ($a as $v) {
+			$aux = $this->query("SELECT userid FROM mdl_user_enrolments WHERE enrolid = (SELECT id FROM mdl_enrol WHERE courseid= ? LIMIT 1) AND userid = ".$v[0],array($id));
+			if(sizeof($aux)>0){
+				$x[$k] = $this->query("SELECT id,firstname,lastname,email FROM mdl_user WHERE id=".$aux[0][0])[0];
+				$k++;
+			}
+		}
+
+		return $x;
+	}
+
+
+
+
+
+
+
+
 
 
 

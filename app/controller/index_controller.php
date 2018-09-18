@@ -52,17 +52,18 @@ class index_controller extends Controller
 		 	$txt .= "<td>".$val[0]."</td>";
 		 	$txt .= "<td>".$val[1]."</td>";
 		 	$txt .= "<td>".$val[2]."</td>";
-		 	$txt .= "<td>Ver listado</td></tr>";
-		 	//$txt .= "<td>".$val[2]."</td></tr>";
+		 	$txt .= "<td><a href=\"?k=index/cursos/".$this->parameter('campus')."/".$val[0]."\">Ver listado</a></td></tr>";
 		 	$k++;
 		} 
 		$this->write($txt);
 	}
 
 
-	function cursos($id){
-		//$obj = $this->model('Sedes');
+	function cursos($campus,$id){
+		$obj = $this->model('Sedes');
 
+		$a = $obj->getListado($campus,$id);
+		$this->set('body',$a);
 	}
 
 
