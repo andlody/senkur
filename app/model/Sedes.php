@@ -1,11 +1,77 @@
 <?php
 
 class Sedes extends Model {
+	public function getCampus(){
+		return $this->query("SELECT DISTINCT data FROM mdl_user_info_data WHERE fieldid=4 ORDER BY data ASC");
+	}
+
+	public function getCursos($campus){
+		$a = $this->query("SELECT DISTINCT userid FROM mdl_user_info_data WHERE fieldid=4 AND  data LIKE ?",array($campus));
+		
+		$b = array();
+		$k=0;
+		foreach ($a as $v) {
+			if($this->query("SELECT roleid FROM mdl_role_assignments WHERE userid = ".$v[0])[0][0] == 5){
+				$b[$k]=$v;
+				$k++;
+			}
+		}
+
+		$a=$b;
+		
+		for($i=0;$i<sizeof($a);$i++){
+			$a[$i][1] = $this->query("SELECT DISTINCT enrolid FROM mdl_user_enrolments WHERE userid=".$a[$i][0]);
+		}
+
+		$b = array();
+		$k=0;
+		for($i=0;$i<sizeof($a);$i++){
+			foreach ($a[$i][1] as $v) {
+				$aux = $this->query("SELECT courseid,(SELECT fullname FROM mdl_course WHERE mdl_course.id = courseid) FROM mdl_enrol WHERE id=".$v[0])[0];
+				
+				$bnd=true;
+				for($j=0;$j<sizeof($b);$j++) {
+					if($aux[0]==$b[$j][0]){
+						$b[$j][2] += 1;
+						$bnd=false;
+					}
+				}
+
+				if($bnd){
+					$b[$k] = $aux;
+					$b[$k][2] = 1;
+					$k++;
+				}
+			}
+		}
+
+		return $b;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public function getZonal(){
 		return $this->query("SELECT DISTINCT data FROM mdl_user_info_data WHERE fieldid=8 ORDER BY data ASC");
 	}
 
-	public function getCampus($zonal){
+	public function getCampusBK($zonal){
 		$a = $this->query("SELECT DISTINCT userid FROM mdl_user_info_data WHERE fieldid=8 AND  data LIKE ? ORDER BY userid ASC",array($zonal));
 		
 		$aux = '';
@@ -27,6 +93,77 @@ class Sedes extends Model {
 		}
 		return $b;		
 	}
+
+	public function getCursosBKKK($zonal,$campus){
+		$a = $this->query("SELECT DISTINCT userid FROM mdl_user_info_data WHERE fieldid=8 AND  data LIKE ? ORDER BY userid ASC",array($zonal));
+		
+		$k=0;
+		for($i=0;$i<sizeof($a);$i++){
+			 if($campus == $this->query("SELECT data FROM mdl_user_info_data WHERE fieldid=4 AND userid = ".$a[$i][0])[0][0]){
+			 	$b[$k] = $a[$i][0];
+			 	$k++;
+			 }
+		}
+
+		return array(array(sizeof($b),3));
+//return $b;//array(sizeof($b));
+		$k=0;
+		$x=array();
+		foreach ($b as $v) {
+			$c = $this->query("SELECT DISTINCT enrolid FROM mdl_user_enrolments WHERE userid=".$v);//return $c;
+			foreach ($c as $m) {
+				$bnd = true;
+				foreach ($x as $u) {
+					if($u == $m[0]) $bnd = false;
+				}
+
+				if($bnd){
+					$x[$k] = $m[0];
+					$k++;
+				} 			
+			}
+		}
+
+		$k=0;
+		foreach ($x as $v) {
+			$y[$k] = $this->query("SELECT (SELECT fullname FROM mdl_course WHERE mdl_course.id = courseid),id FROM mdl_enrol WHERE id=".$v)[0];
+			$k++;
+		}
+
+		$k=0;
+		foreach ($y as $v) {
+			$y[$k][1] = $this->query("SELECT COUNT(id) FROM mdl_user_enrolments WHERE enrolid=".$v[1])[0][0];//return $c;
+			$k++;
+		}
+
+
+		return $y;
+
+	}
+
+
+
+
+
+
+
+
+
+// =         ========
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	public function getCarrera($zonal,$campus){
 		$a = $this->query("SELECT DISTINCT userid FROM mdl_user_info_data WHERE fieldid=8 AND  data LIKE ? ORDER BY userid ASC",array($zonal));
@@ -58,6 +195,30 @@ class Sedes extends Model {
 		}
 		return $c;			
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 	public function getPeriodo($zonal,$campus,$carrera){
@@ -141,7 +302,7 @@ class Sedes extends Model {
 
 //---------------------
 
-	public function getCursos($zonal,$campus,$carrera){
+	public function getCursosBK($zonal,$campus,$carrera){
 		$a = $this->query("SELECT DISTINCT userid FROM mdl_user_info_data WHERE fieldid=8 AND  data LIKE ? ORDER BY userid ASC",array($zonal));
 		
 		$k=0;

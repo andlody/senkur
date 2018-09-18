@@ -22,4 +22,11 @@ class Cursos extends Model {
 		return $this->query("SELECT fullname FROM mdl_course WHERE category = ? ",array($id));
 		
 	}
+
+	public function getHeadCurso($id){
+		$a = $this->query("SELECT id,itemname,aggregationcoef2,itemmodule,iteminstance FROM mdl_grade_items WHERE courseid = ? ",array($id));
+
+		$b = $this->query("SELECT (SELECT CONCAT(firstname,' ',lastname) FROM mdl_user WHERE id=userid),grade FROM mdl_assign_grades WHERE assignment = 547");
+		return array($a,$b);
+	}
 }

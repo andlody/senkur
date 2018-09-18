@@ -17,9 +17,15 @@
 	<div class="panel panel-primary text-justify">
         <div class="panel-body text-left" style="padding: 5px 5px;">
         	<div class="row">
-            	<div class="col-xs-4"><strong>Categoria:</strong> Tecnologias de la informacion</div>
-            	<div class="col-xs-4"><strong>Categoria:</strong> Tecnologias de la informacion</div>
+            	
             </div>
         </div> 
     </div>
 </div>		
+
+
+<script>
+	function verCursos(){
+
+	}
+</script>

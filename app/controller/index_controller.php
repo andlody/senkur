@@ -34,9 +34,54 @@ class index_controller extends Controller
 	}
 
 	function index(){
+		$this->view('index/otro');
+		
 		$obj = $this->model('Sedes');
-		$this->set('sedes',$obj->getZonal());
+		//$this->set('sedes',$obj->getZonal());
+		$this->set('campus',$obj->getCampus());
 	}
+
+	function getcursos(){
+		$obj = $this->model('Sedes');
+		$a = $obj->getCursos($this->parameter('campus'));
+
+		$txt = ''; $k=1;
+		foreach($a as $val) {
+		 	//$txt .= '<tr onClick="location.href=\'?k=index/verCurso/'.$val[0].'\'" style="cursor:pointer;color:#0000AA"><td>'.$k."</td>";
+		 	$txt .= "<tr><td>".$k."</td>";
+		 	$txt .= "<td>".$val[0]."</td>";
+		 	$txt .= "<td>".$val[1]."</td>";
+		 	$txt .= "<td>".$val[2]."</td>";
+		 	$txt .= "<td>Ver listado</td></tr>";
+		 	//$txt .= "<td>".$val[2]."</td></tr>";
+		 	$k++;
+		} 
+		$this->write($txt);
+	}
+
+
+	function cursos($id){
+		//$obj = $this->model('Sedes');
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	function campus(){
 		$obj = $this->model('Sedes');
@@ -48,6 +93,36 @@ class index_controller extends Controller
 		$this->write($txt);
 	}
 
+
+	function cursosBKK(){
+		$obj = $this->model('Sedes');
+		$a = $obj->getCursos($this->parameter('zonal'),$this->parameter('campus'));
+
+		//var_dump($a);
+		//return;
+
+		$txt = ''; $k=1;
+		foreach($a as $val) {
+		 	//$txt .= '<tr onClick="location.href=\'?k=index/verCurso/'.$val[0].'\'" style="cursor:pointer;color:#0000AA"><td>'.$k."</td>";
+		 	$txt .= "<tr><td>-</td>";
+		 	$txt .= "<td>".$val[0]."</td>";
+		 	$txt .= "<td>".$val[1]."</td></tr>";
+		 	//$txt .= "<td>".$val[2]."</td></tr>";
+		 	$k++;
+		} 
+		$this->write($txt);
+	}
+
+
+
+
+
+
+
+
+
+
+/*
 	function carreras(){
 		$obj = $this->model('Sedes');
 		$a = $obj->getCarrera($this->parameter('zonal'),$this->parameter('campus'));
@@ -74,7 +149,7 @@ class index_controller extends Controller
 		$a = $obj->getCursos($this->parameter('zonal'),$this->parameter('campus'),$this->parameter('carrera'));
 		$txt = ''; $k=1;
 		foreach($a as $val) {
-		 	$txt .= "<tr><td>".$k."</td>";
+		 	$txt .= '<tr onClick="location.href=\'?k=index/verCurso/'.$val[0].'\'" style="cursor:pointer;color:#0000AA"><td>'.$k."</td>";
 		 	$txt .= "<td>".$val[1]."</td>";
 		 	$txt .= "<td>".$val[2]."</td></tr>";
 		 	$k++;
@@ -88,7 +163,7 @@ class index_controller extends Controller
 		$a = $obj->getAlumnos($this->parameter('zonal'),$this->parameter('campus'),$this->parameter('carrera'));
 		$txt = ''; $k=1;
 		foreach($a as $val) {
-		 	$txt .= "<tr><td>".$k."</td>";
+		 	$txt .= '<tr onClick="location.href=\'?k=index/verCurso/'.$val[0].'\'"><td>'.$k."</td>";
 		 	$txt .= "<td>".$val[1]."</td>";
 		 	$txt .= "<td>".$val[2]."</td>";
 		 	$txt .= "<td>".$val[3]."</td></tr>";
@@ -98,12 +173,30 @@ class index_controller extends Controller
 	}
 
 
+	function verCurso($id){
+		$obj = $this->model('Cursos');
+		$crs = $obj->getHeadCurso($id);
+		$txt='';
+		foreach ($crs[0] as $v) {
+			$title = (strlen($v[1])>25)? substr($v[1],0,25).'...':$v[1];
+			$txt .= '<th scope="col" title="'.$v[1].'">'.$title.'</th>';
+		}
+		$this->set('head',$txt);
+		$this->set('body',$crs[1]);
+	}
+
+
+
+
+
+
 
 	function cursosx(){
 	//	$this->write('hola');return;
 		$obj = $this->model('Cursos');
 		$this->set('cursos',$obj->getCategorias());
 	}
+	*/
 }
 
 
