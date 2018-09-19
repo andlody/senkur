@@ -11,7 +11,9 @@ class Sedes extends Model {
 		$b = array();
 		$k=0;
 		foreach ($a as $v) {
-			if($this->query("SELECT roleid FROM mdl_role_assignments WHERE userid = ".$v[0])[0][0] == 5){
+			$zz = $this->query("SELECT roleid FROM mdl_role_assignments WHERE userid = ".$v[0]);
+			$zz = (sizeof($zz)>0)?$zz[0][0]:0;
+			if($zz == 5){
 				$b[$k]=$v;
 				$k++;
 			}
@@ -62,12 +64,15 @@ class Sedes extends Model {
 
 		$a=$b;
 
+		$idNotaFinal = $this->query("SELECT id FROM mdl_grade_items WHERE itemtype LIKE 'course' AND courseid = ?",array($id))[0][0];
+
 		$x = array();
 		$k=0;
 		foreach ($a as $v) {
 			$aux = $this->query("SELECT userid FROM mdl_user_enrolments WHERE enrolid = (SELECT id FROM mdl_enrol WHERE courseid= ? LIMIT 1) AND userid = ".$v[0],array($id));
 			if(sizeof($aux)>0){
-				$x[$k] = $this->query("SELECT id,firstname,lastname,email FROM mdl_user WHERE id=".$aux[0][0])[0];
+				$x[$k] = $this->query("SELECT id,firstname,lastname,email,
+					(SELECT finalgrade FROM mdl_grade_grades WHERE mdl_grade_grades.userid=mdl_user.id AND itemid=$idNotaFinal ) FROM mdl_user WHERE id=".$aux[0][0])[0];
 				$k++;
 			}
 		}
@@ -79,6 +84,58 @@ class Sedes extends Model {
 		return $this->query("SELECT fullname FROM mdl_course WHERE id = ?",array($id))[0][0];
 	}
 
+	public function getHeadCurso($id){
+		return $this->query("SELECT itemname,aggregationcoef FROM mdl_grade_items WHERE courseid = ? ORDER BY sortorder ASC",array($id));
+	}
+
+	public function getEvidencias($campus,$id){
+		$a = $this->query("SELECT DISTINCT userid FROM mdl_user_info_data WHERE fieldid=4 AND  data LIKE ?",array($campus));
+		
+		$b = array();
+		$k=0;
+		foreach ($a as $v) {
+			if($this->query("SELECT roleid FROM mdl_role_assignments WHERE userid = ".$v[0])[0][0] == 5){
+				$b[$k]=$v;
+				$k++;
+			}
+		}
+
+		$a=$b;
+
+		//$idNotaFinal = $this->query("SELECT id FROM mdl_grade_items WHERE itemtype LIKE 'course' AND courseid = ?",array($id))[0][0];
+
+		$n = $this->query("SELECT id FROM mdl_grade_items WHERE courseid = ?  ORDER BY sortorder ASC",array($id));
+
+		$x = array();
+		$k=0;
+		foreach ($a as $v) {
+			$aux = $this->query("SELECT userid FROM mdl_user_enrolments WHERE enrolid = (SELECT id FROM mdl_enrol WHERE courseid= ? LIMIT 1) AND userid = ".$v[0],array($id));
+			if(sizeof($aux)>0){
+				$x[$k]['a'] = $this->query("SELECT id,CONCAT(firstname,' ',lastname) FROM mdl_user WHERE id=".$aux[0][0])[0];
+
+				for($i=0;$i<sizeof($n);$i++){
+					$zz = $this->query("SELECT finalgrade FROM mdl_grade_grades WHERE userid=".$aux[0][0]." AND itemid=".$n[$i][0]);
+					$x[$k]['b'][$i] = (sizeof($zz)>0)? number_format($zz[0][0],1):'-';
+				}
+				$k++;
+			}
+		}
+
+		$y = array();
+		for($i=0;$i<sizeof($x);$i++){
+			$y[$i][0] = $i+1;
+			$y[$i][1] = $x[$i]['a'][0];
+			$y[$i][2] = $x[$i]['a'][1];
+
+			for($j=1;$j<sizeof($x[$i]['b']);$j++){
+				$y[$i][2+$j] = $x[$i]['b'][$j];	
+			}
+			$y[$i][2+$j] = $x[$i]['b'][0];	
+			$y[$i][3+$j] = ($y[$i][2+$j]>10.5)?'<span style="color:blue">Aprobado</span>':'<span style="color:red">Desaprobado</span>';	
+		}
+
+		return $y;
+	}
 
 
 

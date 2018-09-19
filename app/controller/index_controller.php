@@ -52,14 +52,15 @@ class index_controller extends Controller
 		 	$txt .= "<td>".$val[0]."</td>";
 		 	$txt .= "<td>".$val[1]."</td>";
 		 	$txt .= "<td>".$val[2]."</td>";
-		 	$txt .= "<td><a href=\"?k=index/cursos/".$this->parameter('campus')."/".$val[0]."\">Ver listado</a></td></tr>";
+		 	$txt .= "<td><a href=\"?k=index/listado/".$this->parameter('campus')."/".$val[0]."\">Listado</a></td>";
+		 	$txt .= "<td><a href=\"?k=index/evidencias/".$this->parameter('campus')."/".$val[0]."\">Evidencias</a></td></tr>";
 		 	$k++;
 		} 
 		$this->write($txt);
 	}
 
 
-	function cursos($campus,$id){
+	function listado($campus,$id){
 		$obj = $this->model('Sedes');
 
 		$a = $obj->getListado($campus,$id);
@@ -70,7 +71,19 @@ class index_controller extends Controller
 	}
 
 
+	function evidencias($campus,$id){
+		$obj = $this->model('Sedes');
+	
+		$this->set('campus',$campus);
+		$this->set('id',$id);
+		$this->set('curso',$obj->getNombreCurso($id));
 
+		$a = $obj->getHeadCurso($id);
+		$this->set('head',$a);
+
+		$a = $obj->getEvidencias($campus,$id);
+		$this->set('body',$a);
+	}
 
 
 

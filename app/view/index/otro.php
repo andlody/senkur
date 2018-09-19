@@ -32,13 +32,14 @@
             <div class="panel-body">
                 <div class="form-group">
 
-                    <table class="table text-left">
+                    <table class="table text-left  table-striped">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">ID CURSO</th>
                                 <th scope="col">NOMBRE CURSO</th>
                                 <th scope="col">ALUMNOS*</th>
+                                <th scope="col">Ver</th>
                                 <th scope="col">Ver</th>
                             </tr>
                         </thead>

@@ -26,26 +26,26 @@
         <div class="panel-body">
             <div class="form-group">
 
-                <table class="table text-left" style="font-size:12px">
+                <table class="table text-left table-striped" style="font-size:12px">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">ID ALUMNO</th>
-                            <th scope="col">NOMBRE ALUMNO</th>
-                            <th scope="col">EMAIL</th>
-                            <th scope="col">Nota</th>
+                            <th scope="col">ID Alumno</th>
+                            <th scope="col">Nombre alumno</th>
+                            <?php   $b = $v->get('head');
+                                    for($i=1;$i<sizeof($b);$i++){ ?>
+                                        <th scope="col"><?= $b[$i][0] ?> <span style="font-size:10px;color:green">(<?= number_format($b[$i][1]) ?>%)</span></th>
+                            <?php   } ?>
+                            <th scope="col">Nota final</th>
                             <th scope="col">Estado</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php   for($i=0;$i<sizeof($a);$i++){ ?>
                                     <tr>
-                                        <td><?=($i+1)?></td>
-                                        <td><?=$a[$i][0]?></td>
-                                        <td><?=$a[$i][1]?> <?=$a[$i][2]?></td>
-                                        <td><?=$a[$i][3]?></td>
-                                        <td></td>
-                                        <td></td>
+                                        <?php for($j=0;$j<sizeof($a[$i]);$j++){ ?>
+                                            <td><?= $a[$i][$j] ?></td>
+                                        <?php } ?>
                                     </tr>
                         <?php   } ?>
                     </tbody>
