@@ -15,7 +15,7 @@
                     <?= $v->get('campus') ?><br>
                     <?= sizeof($a) ?>
                 </div>
-                <div class="col-xs-2 text-right"><br><a class="btn btn-primary" href="?">Regresar</a></div>
+                <div class="col-xs-2 text-right"><br><a class="btn btn-primary" href="javascript:window.history.back();">Regresar</a></div>
             </div>
         </div> 
     </div>
@@ -38,14 +38,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php   for($i=0;$i<sizeof($a);$i++){ ?>
+                        <?php   for($i=0;$i<sizeof($a);$i++){ 
+                                if(trim($a[$i][4])=='') 
+                                    $rst = '-';
+                                else
+                                    $rst = (number_format($a[$i][4],1)>10.5)?'<span style="color:blue">Aprobado</span>':'<span style="color:red">Desaprobado</span>';
+                        ?>
                                     <tr>
                                         <td><?=($i+1)?></td>
                                         <td><?=$a[$i][0]?></td>
                                         <td><?=$a[$i][1]?> <?=$a[$i][2]?></td>
                                         <td><?=$a[$i][3]?></td>
-                                        <td><?=number_format($a[$i][4],1) ?></td>
-                                        <td><?= (number_format($a[$i][4],1)>10.5)?'<span style="color:blue">Aprobado</span>':'<span style="color:red">Desaprobado</span>'; ?></td>
+                                        <td><?=($rst=='-')?'-':number_format($a[$i][4],1) ?></td>
+                                        <td><?=$rst;  ?></td>
                                     </tr>
                         <?php   } ?>
                     </tbody>
@@ -56,5 +61,5 @@
 </div>
 
 <div class="col-lg-12 text-left">
-    <a class="btn btn-primary" href="?">Regresar</a>
+    <a class="btn btn-primary" href="javascript:window.history.back();">Regresar</a>
 </div>

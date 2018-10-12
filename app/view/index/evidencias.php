@@ -15,7 +15,7 @@
                     <?= $v->get('campus') ?><br>
                     <?= sizeof($a) ?>
                 </div>
-                <div class="col-xs-2 text-right"><br><a class="btn btn-primary" href="?">Regresar</a></div>
+                <div class="col-xs-2 text-right"><br><a class="btn btn-primary" href="javascript:window.history.back();">Regresar</a></div>
             </div>
         </div> 
     </div>
@@ -56,5 +56,5 @@
 </div>
 
 <div class="col-lg-12 text-left">
-    <a class="btn btn-primary" href="?">Regresar</a>
+    <a class="btn btn-primary" href="javascript:window.history.back();">Regresar</a>
 </div>

@@ -3,6 +3,7 @@
 class index_controller extends Controller
 { 
 	function before(){
+		$this->set('full_name','pruebas@senati.com');
 		/*
 		if($this->session('status')){
 			$this->set('full_name','Andre Ochoa');	
@@ -34,11 +35,27 @@ class index_controller extends Controller
 	}
 
 	function index(){
+		$this->redirect('index/senati');
+	}
+
+	function senati($id,$per){
 		$this->view('index/otro');
 		
 		$obj = $this->model('Sedes');
 		//$this->set('sedes',$obj->getZonal());
 		$this->set('campus',$obj->getCampus());
+
+		//------
+		$this->set('body',array());
+		if(trim($id)!=''){
+			$obj = $this->model('Sedes');
+			$this->set('body',$obj->getCursos($id,$per));
+			$this->set('sede',$id);
+			if($per==0 || trim($per)=='')
+				$this->set('periodo','Todos');
+			else
+				$this->set('periodo',$per);
+		}
 	}
 
 	function getcursos(){

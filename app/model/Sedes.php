@@ -5,7 +5,7 @@ class Sedes extends Model {
 		return $this->query("SELECT DISTINCT data FROM mdl_user_info_data WHERE fieldid=4 ORDER BY data ASC");
 	}
 
-	public function getCursos($campus){
+	public function getCursos($campus,$per){
 		$a = $this->query("SELECT DISTINCT userid FROM mdl_user_info_data WHERE fieldid=4 AND  data LIKE ?",array($campus));
 		
 		$b = array();
@@ -47,7 +47,15 @@ class Sedes extends Model {
 			}
 		}
 
-		return $b;
+		if($per!=0 && trim($per)!=''){
+			foreach ($b as $v) {
+				if(strpos($v[1], $per)) 
+					$c[] = $v;
+			}
+		}
+		else
+			return $b;
+		return $c;
 	}
 
 	public function getListado($campus,$id){
@@ -131,7 +139,10 @@ class Sedes extends Model {
 				$y[$i][2+$j] = $x[$i]['b'][$j];	
 			}
 			$y[$i][2+$j] = $x[$i]['b'][0];	
-			$y[$i][3+$j] = ($y[$i][2+$j]>10.5)?'<span style="color:blue">Aprobado</span>':'<span style="color:red">Desaprobado</span>';	
+			if($y[$i][2+$j]=='-')
+				$y[$i][3+$j] = '-';
+			else	
+				$y[$i][3+$j] = ($y[$i][2+$j]>10.5)?'<span style="color:blue">Aprobado</span>':'<span style="color:red">Desaprobado</span>';	
 		}
 
 		return $y;

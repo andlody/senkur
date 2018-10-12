@@ -18,6 +18,7 @@
 				<!-- fin body --> 
             </div>		
 		</div>
+		<br>
 		<!-- footer -->			
 			<?php include $v->partial("footer"); ?>
         <!-- fin footer -->

@@ -1,6 +1,6 @@
 <footer class="footer navbar-fixed-bottom">
     <div class="container-fluid text-right">
-        <!--<p class="text-muted">Powered by <a href="https://www.sierrabravia.com" target="_blank">SierraBravia.com</a></p>-->
+        <p class="text-muted">Powered by <a href="https://www.andlody.com" target="_blank">AndLody.com</a></p>
     </div>
 </footer>
 
