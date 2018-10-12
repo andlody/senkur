@@ -9,7 +9,7 @@
                                 for($i=0;$i<sizeof($a);$i++){ 
                                     if($a[$i][0]==$v->get('sede')){ ?>
                                         <option value="<?= $a[$i][0] ?>" selected><?= $a[$i][0] ?></option>
-                                    <? }else{ ?>
+                                    <?php }else{ ?>
                                         <option value="<?= $a[$i][0] ?>"><?= $a[$i][0] ?></option>
                         <?php           }
                                 }   ?>
