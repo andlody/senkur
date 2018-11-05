@@ -29,11 +29,15 @@ class index_controller extends Controller
 					$this->session('tipo',$n);
 					$this->set('full_name',$USER->firstname.' '.$USER->lastname);
 				}
-				else
+				else{
+					$this->session('status',false);
 					header("Location: /");	
+				}
 			}
-			else
+			else{
+				$this->session('status',false);
 				header("Location: /");
+			}
 		}
 
 /*

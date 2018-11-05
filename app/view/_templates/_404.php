@@ -11,8 +11,7 @@
 		<div class="container">
 			<!-- body --> 
 	            	<div class="panel panel-body text-center">
-	                	<!-- <h1> 404 - Página no Encontrada</h1> -->
-	                	<?php include $v->body; ?>
+	                	<h1> 404 - Página no Encontrada</h1> 
 	            	</div>					
 			<!-- fin body -->
 		</div>

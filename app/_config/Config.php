@@ -7,7 +7,7 @@
 
 class Config {
 	//Si la pagina esta en produccion, cambiar el valor a false.
-    const DEV = true;
+    const DEV = false;
 
 	//Base de Datos | type > 1:mysql   2:postgres   3:oracle
 	const TYPE 		= 1;
