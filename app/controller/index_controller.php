@@ -14,8 +14,8 @@ class index_controller extends Controller
 		//*	
 		require_once('../config.php');
 		//var_dump($USER);
-		$obj = $this->model('Sedes');
-		echo $obj->esJefe($USER->id);return;
+		//$obj = $this->model('Sedes');
+		//echo $obj->esJefe($USER->id);return;
 		//$this->write("");
 		//return;
 		if($USER->id!=0 && $this->session('status')){
