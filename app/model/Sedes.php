@@ -8,7 +8,7 @@ class Sedes extends Model {
 	public function getCampusX($id){
 		if($id==1 || $id==11){
 			$c = $this->query("SELECT LOWER(city) FROM mdl_user WHERE id=$id")[0][0];
-			return $this->query("SELECT DISTINCT data FROM mdl_user_info_data WHERE fieldid=4 AND LOWER(data)=$c ORDER BY data ASC");
+			return $this->query("SELECT DISTINCT data FROM mdl_user_info_data WHERE fieldid=4 AND LOWER(data)='$c' ORDER BY data ASC");
 		}else{
 			return $this->getCampus();
 		}
