@@ -3,20 +3,27 @@
 class index_controller extends Controller
 { 
 	function before(){
-		$this->set('full_name','pruebas@senati.com');
+		//$this->set('full_name','pruebas@senati.com');
 		/*
 		if($this->session('status')){
 			$this->set('full_name','Andre Ochoa');	
 		} else
 			$this->redirect('denied');
-		*/
+		//*/
 
-		/*	
+		//*	
 		require_once('../config.php');
-
+		var_dump($USER);
+		$this->write("");
+		return;
+/*
 		if($USER->id==0){
-			$this->redirect('denied');
+			//$this->redirect('denied');
+			$this->write("NO");
 			return;
+		}
+		else{
+			$this->write("NO");
 		}
 		$this->set('full_name',$USER->username);
 		//*/
@@ -31,10 +38,10 @@ class index_controller extends Controller
 			else
 				$this->redirect('denied');
 		}
-*/
+//*/
 	}
 
-	function index(){
+	function index2(){
 		$this->redirect('index/senati');
 	}
 
