@@ -7,16 +7,20 @@
 
 class Config {
 	//Si la pagina esta en produccion, cambiar el valor a false.
-    const DEV = false;
+    const DEV = true;
 
 	//Base de Datos | type > 1:mysql   2:postgres   3:oracle
 	const TYPE 		= 1;
 	const HOST 		= 'localhost';
 	const PORT 		= '3306';
 	
-	const USER 		= 'usuariomoodle';
+/*	const USER 		= 'usuariomoodle';
 	const PASS 		= 'Cms@Azure2018';
 	const DATABASE  = 'moodlesenati';
+*/
+	const USER 		= 'mdlusr';
+	const PASS 		= '2Rb!rFW';
+	const DATABASE  = 'moodle';
 /*
 	const USER 		= 'root';
 	const PASS 		= '';
