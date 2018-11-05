@@ -40,7 +40,7 @@ class index_controller extends Controller
 		}
 //*/
 	}
-
+	function index(){$this->write('d');}
 	function index2(){
 		$this->redirect('index/senati');
 	}
