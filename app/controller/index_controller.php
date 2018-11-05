@@ -23,8 +23,10 @@ class index_controller extends Controller
 		}else{
 			if($USER->id!=0){
 				$obj = $this->model('Sedes');
-				if($obj->esJefe($USER->id)){
+				$n = $obj->esJefe($USER->id);
+				if($n == 1 || $n == 11){
 					$this->session('status',true);
+					$this->session('tipo',$n);
 					$this->set('full_name',$USER->firstname.' '.$USER->lastname);
 				}
 				else
@@ -70,7 +72,7 @@ class index_controller extends Controller
 		
 		$obj = $this->model('Sedes');
 		//$this->set('sedes',$obj->getZonal());
-		$this->set('campus',$obj->getCampus());
+		$this->set('campus',$obj->getCampusX($this->session('tipo')));
 
 		//------
 		$this->set('body',array());

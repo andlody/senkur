@@ -5,6 +5,15 @@ class Sedes extends Model {
 		return $this->query("SELECT DISTINCT data FROM mdl_user_info_data WHERE fieldid=4 ORDER BY data ASC");
 	}
 
+	public function getCampusX($id){
+		if($id==1 || $id==11){
+			$c = $this->query("SELECT LOWER(city) FROM mdl_user WHERE id=$id")[0][0];
+			return $this->query("SELECT DISTINCT data FROM mdl_user_info_data WHERE fieldid=4 AND LOWER(data)=$c ORDER BY data ASC");
+		}else{
+			return $this->getCampus();
+		}
+	}
+
 	public function getCursos($campus,$per){
 		$a = $this->query("SELECT DISTINCT userid FROM mdl_user_info_data WHERE fieldid=4 AND  data LIKE ?",array($campus));
 		
@@ -309,13 +318,11 @@ class Sedes extends Model {
 
 	public function esJefe($id){
 		$dat = $this->query("SELECT roleid FROM mdl_role_assignments WHERE userid = ".$id)[0][0];
-		//$dat = $this->query("SELECT * FROM mdl_role");
-		if($dat == 11)
-			return true;
+		if($dat == 11 || $dat == 1){
+			return $dat;
+		}
 		else
-			return false;
-		//return json_encode($dat);
-		//. ID 11  JEDE DE CENTRO ROL
+			return 0;
 	}
 
 
