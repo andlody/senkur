@@ -13,9 +13,17 @@ class index_controller extends Controller
 
 		//*	
 		require_once('../config.php');
-		var_dump($USER);
-		$this->write("");
-		return;
+		//var_dump($USER);
+		//$this->write("");
+		//return;
+		if($USER->id!=0){// && $this->session('status')){
+			$this->set('full_name',$USER->firstname.' '.$USER->lastname);
+		}else{
+			//echo '22';
+			//$this->redirect('denied');
+			header("Location: /");
+		}
+
 /*
 		if($USER->id==0){
 			//$this->redirect('denied');
@@ -26,7 +34,7 @@ class index_controller extends Controller
 			$this->write("NO");
 		}
 		$this->set('full_name',$USER->username);
-		//*/
+//*/
 
 /*
 		if($this->session('status') != true){
@@ -40,7 +48,9 @@ class index_controller extends Controller
 		}
 //*/
 	}
+
 	function index(){$this->write('d');}
+	
 	function index2(){
 		$this->redirect('index/senati');
 	}
