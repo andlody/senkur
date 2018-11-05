@@ -16,12 +16,15 @@ class index_controller extends Controller
 		//var_dump($USER);
 		//$this->write("");
 		//return;
-		if($USER->id!=0){// && $this->session('status')){
+		if($USER->id!=0 && $this->session('status')){
 			$this->set('full_name',$USER->firstname.' '.$USER->lastname);
 		}else{
-			//echo '22';
-			//$this->redirect('denied');
-			header("Location: /");
+			if($USER->id!=0){
+				$this->session('status',true);
+				$this->set('full_name',$USER->firstname.' '.$USER->lastname);
+			}
+			else
+				header("Location: /");
 		}
 
 /*
@@ -49,9 +52,9 @@ class index_controller extends Controller
 //*/
 	}
 
-	function index(){$this->write('d');}
+	//function index(){$this->write('d');}
 	
-	function index2(){
+	function index(){
 		$this->redirect('index/senati');
 	}
 
