@@ -308,8 +308,11 @@ class Sedes extends Model {
 
 
 	public function esJefe($id){
-		$dat = $this->query("SELECT roleid FROM mdl_role_assignments WHERE userid = ".$id)[0][0];
-		return $dat;
+		//$dat = $this->query("SELECT roleid, FROM mdl_role_assignments WHERE userid = ".$id)[0][0];
+		$dat = $this->query("SELECT * FROM mdl_role");
+
+		return json_encode($dat);
+		//. ID 11  JEDE DE CENTRO ROL
 	}
 
 
