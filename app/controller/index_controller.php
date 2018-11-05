@@ -14,14 +14,21 @@ class index_controller extends Controller
 		//*	
 		require_once('../config.php');
 		//var_dump($USER);
+		$obj = $this->model('Sedes');
+		echo $obj->esJefe($USER->id);return;
 		//$this->write("");
 		//return;
 		if($USER->id!=0 && $this->session('status')){
 			$this->set('full_name',$USER->firstname.' '.$USER->lastname);
 		}else{
 			if($USER->id!=0){
-				$this->session('status',true);
-				$this->set('full_name',$USER->firstname.' '.$USER->lastname);
+				$obj = $this->model('Sedes');
+				if($obj->esJefe($USER->id)){
+					$this->session('status',true);
+					$this->set('full_name',$USER->firstname.' '.$USER->lastname);
+				}
+				else
+					header("Location: /");	
 			}
 			else
 				header("Location: /");
