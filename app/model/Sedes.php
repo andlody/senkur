@@ -1,6 +1,12 @@
 <?php
 
 class Sedes extends Model {
+	
+	public function pruebas($id){
+		$c = $this->query("SELECT * FROM mdl_user WHERE id=$id");
+		return json_encode($c);
+	}
+
 	public function getCampus(){
 		return $this->query("SELECT DISTINCT data FROM mdl_user_info_data WHERE fieldid=4 ORDER BY data ASC");
 	}
