@@ -76,7 +76,7 @@ class index_controller extends Controller
 		
 		$obj = $this->model('Sedes');
 		//$this->set('sedes',$obj->getZonal());
-		$this->set('campus',$obj->getCampusX($this->session('tipo')));
+		$this->set('campus',$obj->getCampusX($this->session('tipo'),$USER->id));
 
 		//------
 		$this->set('body',array());
