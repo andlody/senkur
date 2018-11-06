@@ -18,6 +18,8 @@ class index_controller extends Controller
 		//echo $obj->pruebas($USER->id);return;
 		//$this->write("");
 		//return;
+
+	/*	
 		if($USER->id!=0 && $this->session('status')){
 			$this->set('full_name',$USER->firstname.' '.$USER->lastname);
 		}else{
@@ -27,6 +29,7 @@ class index_controller extends Controller
 				if($n == 1 || $n == 11){
 					$this->session('status',true);
 					$this->session('tipo',$n);
+					$this->session('id',$USER->id);
 					$this->set('full_name',$USER->firstname.' '.$USER->lastname);
 				}
 				else{
@@ -39,6 +42,22 @@ class index_controller extends Controller
 				header("Location: /");
 			}
 		}
+	*/
+
+
+		if($USER->id == 0){
+			header("Location: /");
+		}else{
+			$this->set('full_name',$USER->firstname.' '.$USER->lastname);
+			$n = $obj->esJefe($USER->id);
+			if($n == 1 || $n == 11){
+				$this->session('tipo',$n);
+				$this->session('id',$USER->id);
+			}else{
+				header("Location: /");
+			}
+		}
+
 
 /*
 		if($USER->id==0){
@@ -76,7 +95,7 @@ class index_controller extends Controller
 		
 		$obj = $this->model('Sedes');
 		//$this->set('sedes',$obj->getZonal());
-		$this->set('campus',$obj->getCampusX($this->session('tipo'),$USER->id));
+		$this->set('campus',$obj->getCampusX($this->session('tipo'),$this->session('id')));
 
 		//------
 		$this->set('body',array());

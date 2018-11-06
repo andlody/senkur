@@ -11,13 +11,13 @@ class Sedes extends Model {
 	}
 
 	public function getCampus(){
-		return $this->query("SELECT DISTINCT data FROM mdl_user_info_data WHERE fieldid=4 ORDER BY data ASC");
+		return $this->query("SELECT DISTINCT UPPER(TRIM(data)) FROM mdl_user_info_data WHERE fieldid=4 ORDER BY data ASC");
 	}
 
 	public function getCampusX($id,$id2){
 		if($id==11){
 			//$c = $this->query("SELECT LOWER(city) FROM mdl_user WHERE id=$id")[0][0];
-			return $this->query("SELECT DISTINCT data FROM mdl_user_info_data WHERE fieldid=12 AND userid=".$id2);
+			return $this->query("SELECT DISTINCT UPPER(TRIM(data)) FROM mdl_user_info_data WHERE fieldid=12 AND userid=".$id2);
 			//return $this->query("SELECT DISTINCT data FROM mdl_user_info_data WHERE fieldid=4 AND LOWER(TRIM(data)) LIKE '$c' ORDER BY data ASC");
 		}else{
 			return $this->getCampus();
@@ -25,7 +25,7 @@ class Sedes extends Model {
 	}
 
 	public function getCursos($campus,$per){
-		$a = $this->query("SELECT DISTINCT userid FROM mdl_user_info_data WHERE fieldid=4 AND  data LIKE ?",array($campus));
+		$a = $this->query("SELECT DISTINCT userid FROM mdl_user_info_data WHERE fieldid=4 AND  UPPER(TRIM(data)) LIKE ?",array($campus));
 		
 		$b = array();
 		$k=0;
@@ -78,7 +78,7 @@ class Sedes extends Model {
 	}
 
 	public function getListado($campus,$id){
-		$a = $this->query("SELECT DISTINCT userid FROM mdl_user_info_data WHERE fieldid=4 AND  data LIKE ?",array($campus));
+		$a = $this->query("SELECT DISTINCT userid FROM mdl_user_info_data WHERE fieldid=4 AND  UPPER(TRIM(data)) LIKE ?",array($campus));
 		
 		$b = array();
 		$k=0;
@@ -116,7 +116,7 @@ class Sedes extends Model {
 	}
 
 	public function getEvidencias($campus,$id){
-		$a = $this->query("SELECT DISTINCT userid FROM mdl_user_info_data WHERE fieldid=4 AND  data LIKE ?",array($campus));
+		$a = $this->query("SELECT DISTINCT userid FROM mdl_user_info_data WHERE fieldid=4 AND  UPPER(TRIM(data)) LIKE ?",array($campus));
 		
 		$b = array();
 		$k=0;
@@ -220,11 +220,11 @@ class Sedes extends Model {
 	}
 
 	public function getCursosBKKK($zonal,$campus){
-		$a = $this->query("SELECT DISTINCT userid FROM mdl_user_info_data WHERE fieldid=8 AND  data LIKE ? ORDER BY userid ASC",array($zonal));
+		$a = $this->query("SELECT DISTINCT userid FROM mdl_user_info_data WHERE fieldid=8 AND  UPPER(TRIM(data)) LIKE ? ORDER BY userid ASC",array($zonal));
 		
 		$k=0;
 		for($i=0;$i<sizeof($a);$i++){
-			 if($campus == $this->query("SELECT data FROM mdl_user_info_data WHERE fieldid=4 AND userid = ".$a[$i][0])[0][0]){
+			 if($campus == $this->query("SELECT UPPER(TRIM(data)) FROM mdl_user_info_data WHERE fieldid=4 AND userid = ".$a[$i][0])[0][0]){
 			 	$b[$k] = $a[$i][0];
 			 	$k++;
 			 }
