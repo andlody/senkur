@@ -49,6 +49,7 @@ class index_controller extends Controller
 			header("Location: /");
 		}else{
 			$this->set('full_name',$USER->firstname.' '.$USER->lastname);
+			$obj = $this->model('Sedes');
 			$n = $obj->esJefe($USER->id);
 			if($n == 1 || $n == 11){
 				$this->session('tipo',$n);
