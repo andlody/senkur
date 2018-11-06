@@ -3,7 +3,9 @@
 class Sedes extends Model {
 	
 	public function pruebas($id){
-		$c = $this->query("SELECT * FROM mdl_user WHERE id=$id");
+		//$c = $this->query("SELECT * FROM mdl_user WHERE id=$id");
+		$c = $this->query("SELECT DISTINCT data,fieldid FROM mdl_user_info_data WHERE userid=$id");
+
 		return json_encode($c);
 	}
 
