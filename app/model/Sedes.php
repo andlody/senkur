@@ -17,9 +17,15 @@ class Sedes extends Model {
 	public function getCampusX($id,$id2){
 		if($id==11){
 			//$c = $this->query("SELECT LOWER(city) FROM mdl_user WHERE id=$id")[0][0];
-			$a = $this->query("SELECT DISTINCT UPPER(TRIM(data)) FROM mdl_user_info_data WHERE fieldid=12 AND userid=".$id2);
-			return explode(',',$a);
 			//return $this->query("SELECT DISTINCT data FROM mdl_user_info_data WHERE fieldid=4 AND LOWER(TRIM(data)) LIKE '$c' ORDER BY data ASC");
+
+			$a = $this->query("SELECT DISTINCT UPPER(TRIM(data)) FROM mdl_user_info_data WHERE fieldid=12 AND userid=".$id2)[0][0];
+			$b = explode(',',$a);
+			$c[];
+			for($i=0;$i<sizeof($b);$i++) {
+				$c[$i][0]=trim($b[$i]);
+			}
+			return $c;
 		}else{
 			return $this->getCampus();
 		}
