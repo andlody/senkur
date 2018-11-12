@@ -47,7 +47,7 @@ class index_controller extends Controller
 
 		if($USER->id == 0){
 			header("Location: /");
-		}else{echo 'juju';return;
+		}else{echo 'juj: '.$USER->firstname;return;
 			$this->set('full_name',$USER->firstname.' '.$USER->lastname);
 			$obj = $this->model('Sedes');
 			$n = $obj->esJefe($USER->id);
@@ -90,10 +90,8 @@ class index_controller extends Controller
 	function index(){
 		$this->redirect('index/senati');
 	}
+	
 	function senati($id,$per){
-		$this->write('index/otro');
-	}
-	function senati2($id,$per){
 		$this->view('index/otro');
 		
 		$obj = $this->model('Sedes');
