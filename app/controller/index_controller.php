@@ -47,7 +47,7 @@ class index_controller extends Controller
 
 		if($USER->id == 0){
 			header("Location: /");
-		}else{
+		}else{echo 'juju';return;
 			$this->set('full_name',$USER->firstname.' '.$USER->lastname);
 			$obj = $this->model('Sedes');
 			$n = $obj->esJefe($USER->id);
