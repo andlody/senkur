@@ -20,14 +20,15 @@ class Sedes extends Model {
 			//return $this->query("SELECT DISTINCT data FROM mdl_user_info_data WHERE fieldid=4 AND LOWER(TRIM(data)) LIKE '$c' ORDER BY data ASC");
 			//*
 			$a = $this->query("SELECT DISTINCT UPPER(TRIM(data)) FROM mdl_user_info_data WHERE fieldid=12 AND userid=".$id2)[0][0];
-			echo $a;
-		/*	$b = explode(',',$a);
-			$c = array();
-			for($i=0;$i<sizeof($b);$i++) {
-				$c[$i][0]=trim($b[$i]);
+			if(strlen($a)>0){
+				$b = explode(',',$a);
+				$c = array();
+				for($i=0;$i<sizeof($b);$i++) {
+					$c[$i][0]=trim($b[$i]);
+				}
 			}
-			return $c;*/
-			return $this->getCampus();
+			return $c;
+			//return $this->getCampus();
 		}else{
 			return $this->getCampus();
 		}
