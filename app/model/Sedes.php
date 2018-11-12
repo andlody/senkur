@@ -5,9 +5,9 @@ class Sedes extends Model {
 	public function pruebas($id){
 		//$c = $this->query("SELECT * FROM mdl_user WHERE id=$id");
 		//$c = $this->query("SELECT DISTINCT data,fieldid FROM mdl_user_info_data WHERE userid=$id");
-		$c = $this->query("SELECT DISTINCT LOWER(TRIM(data)) FROM mdl_user_info_data WHERE fieldid=12 AND userid=$id ORDER BY id DESC");
-
-		return json_encode($c);
+		//$c = $this->query("SELECT DISTINCT LOWER(TRIM(data)) FROM mdl_user_info_data WHERE fieldid=12 AND userid=$id ORDER BY id DESC");
+		$a = $this->query("SELECT DISTINCT UPPER(TRIM(data)) FROM mdl_user_info_data WHERE fieldid=12 AND userid=".$id2)[0][0];
+		return '>>'.$a;//json_encode($c);
 	}
 
 	public function getCampus(){
@@ -22,7 +22,7 @@ class Sedes extends Model {
 			$a = $this->query("SELECT DISTINCT UPPER(TRIM(data)) FROM mdl_user_info_data WHERE fieldid=12 AND userid=".$id2)[0][0];
 			echo $a;
 		/*	$b = explode(',',$a);
-			$c[];
+			$c = array();
 			for($i=0;$i<sizeof($b);$i++) {
 				$c[$i][0]=trim($b[$i]);
 			}
