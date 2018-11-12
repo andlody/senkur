@@ -90,8 +90,8 @@ class index_controller extends Controller
 	function index(){
 		$this->redirect('index/senati');
 	}
-
-	function senati($id,$per){
+	function senati($id,$per){}
+	function senati2($id,$per){
 		$this->view('index/otro');
 		
 		$obj = $this->model('Sedes');
