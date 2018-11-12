@@ -47,10 +47,10 @@ class index_controller extends Controller
 
 		if($USER->id == 0){
 			header("Location: /");
-		}else{echo 'juj: '.$USER->firstname;return;
+		}else{
 			$this->set('full_name',$USER->firstname.' '.$USER->lastname);
 			$obj = $this->model('Sedes');
-			$n = $obj->esJefe($USER->id);
+			$n = $obj->esJefe($USER->id);echo $n;
 			if($n == 1 || $n == 11){
 				$this->session('tipo',$n);
 				$this->session('id',$USER->id);
@@ -90,7 +90,7 @@ class index_controller extends Controller
 	function index(){
 		$this->redirect('index/senati');
 	}
-	
+
 	function senati($id,$per){
 		$this->view('index/otro');
 		
